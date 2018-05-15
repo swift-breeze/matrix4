@@ -21,6 +21,9 @@
 
 
 public struct Vector3<T:ArithmeticType> : VectorType {
+    public func index(after i: Int) -> Int {
+        return i + 1
+    }
 
     public typealias Element = T
 
@@ -31,7 +34,7 @@ public struct Vector3<T:ArithmeticType> : VectorType {
     public var b:T { get {return z} set {z = newValue} }
 
     public var startIndex: Int { return 0 }
-    public var endIndex: Int { return 3 }
+    public var endIndex: Int { return 4 }
 
     public subscript(index: Int) -> T {
         get {
@@ -54,7 +57,7 @@ public struct Vector3<T:ArithmeticType> : VectorType {
     }
 
     public var debugDescription: String {
-        return String(self.dynamicType) + "(\(x), \(y), \(z))"
+        return "\(type(of: self))" + "(\(x), \(y), \(z))"
     }
 
     public var hashValue: Int {
@@ -102,31 +105,31 @@ public struct Vector3<T:ArithmeticType> : VectorType {
         self.z = b
     }
 
-    public init (_ v:Vector3<T>, @noescape _ op:(_:T) -> T) {
+    public init (_ v:Vector3<T>,  _ op:(_:T) -> T) {
         self.x = op(v.x)
         self.y = op(v.y)
         self.z = op(v.z)
     }
 
-    public init (_ s:T, _ v:Vector3<T>, @noescape _ op:(_:T, _:T) -> T) {
+    public init (_ s:T, _ v:Vector3<T>,  _ op:(_:T, _:T) -> T) {
         self.x = op(s, v.x)
         self.y = op(s, v.y)
         self.z = op(s, v.z)
     }
 
-    public init (_ v:Vector3<T>, _ s:T, @noescape _ op:(_:T, _:T) -> T) {
+    public init (_ v:Vector3<T>, _ s:T,  _ op:(_:T, _:T) -> T) {
         self.x = op(v.x, s)
         self.y = op(v.y, s)
         self.z = op(v.z, s)
     }
 
-    public init (_ v1:Vector3<T>, _ v2:Vector3<T>, @noescape _ op:(_:T, _:T) -> T) {
+    public init (_ v1:Vector3<T>, _ v2:Vector3<T>,  _ op:(_:T, _:T) -> T) {
         self.x = op(v1.x, v2.x)
         self.y = op(v1.y, v2.y)
         self.z = op(v1.z, v2.z)
     }
 
-    public init (_ v1:Vector3<T>, _ v2:Vector3<T>, _ v3:Vector3<T>, @noescape _ op:(_:T, _:T, _:T) -> T) {
+    public init (_ v1:Vector3<T>, _ v2:Vector3<T>, _ v3:Vector3<T>,  _ op:(_:T, _:T, _:T) -> T) {
         self.x = op(v1.x, v2.x, v3.x)
         self.y = op(v1.y, v2.y, v3.y)
         self.z = op(v1.z, v2.z, v3.z)
@@ -241,9 +244,10 @@ public struct Vector3<T:ArithmeticType> : VectorType {
     public var bg:Vector2<T> { get { return Vector2<T>(z,y) } set { z = newValue.x; y = newValue.y } }
     public var bgr:Vector3<T> { get { return Vector3<T>(z,y,x) } set { z = newValue.x; y = newValue.y; x = newValue.z } }
 
+    public static func ==(v1: Vector3<T>, v2: Vector3<T>) -> Bool {
+        return v1.x == v2.x && v1.y == v2.y && v1.z == v2.z
+    }
 }
 
 
-public func ==<T:ArithmeticType>(v1: Vector3<T>, v2: Vector3<T>) -> Bool {
-    return v1.x == v2.x && v1.y == v2.y && v1.z == v2.z
-}
+

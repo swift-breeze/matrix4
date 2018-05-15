@@ -20,7 +20,7 @@
 // MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
 
 
-public protocol ArithmeticType : Hashable, Comparable, IntegerLiteralConvertible {
+public protocol ArithmeticType : Hashable, Comparable, ExpressibleByIntegerLiteral {
     init(_: Double)
     init(_: Float)
     init(_: Float80)
@@ -34,34 +34,34 @@ public protocol ArithmeticType : Hashable, Comparable, IntegerLiteralConvertible
     init(_: UInt32)
     init(_: Int64)
     init(_: UInt64)
-    func +(_: Self, _: Self) -> Self
-    func +=(inout _: Self, _: Self)
-    func -(_: Self, _: Self) -> Self
-    func -=(inout _: Self, _: Self)
-    func *(_: Self, _: Self) -> Self
-    func *=(inout _: Self, _: Self)
-    func /(_: Self, _: Self) -> Self
-    func /=(inout _: Self, _: Self)
-    func %(_: Self, _: Self) -> Self
-    func %=(inout _: Self, _: Self)
+    static func +(_: Self, _: Self) -> Self
+    static func +=( _: inout Self, _: Self)
+    static func -(_: Self, _: Self) -> Self
+    static func -=( _: inout Self, _: Self)
+    static func *(_: Self, _: Self) -> Self
+    static func *=( _: inout Self, _: Self)
+    static func /(_: Self, _: Self) -> Self
+    static func /=( _: inout Self, _: Self)
+    static func %(_: Self, _: Self) -> Self
+    static func %=( _: inout Self, _: Self)
 }
 extension Double: ArithmeticType {}
 extension Float: ArithmeticType {}
 extension Float80: ArithmeticType {}
 
 public protocol IntegerArithmeticType : ArithmeticType {
-    func &+(_: Self, _: Self) -> Self
-    func &-(_: Self, _: Self) -> Self
-    func &*(_: Self, _: Self) -> Self
-    func <<(_: Self, _: Self) -> Self
-    func >>(_: Self, _: Self) -> Self
-    func &(_: Self, _: Self) -> Self
-    func &=(inout _: Self, _: Self)
-    func |(_: Self, _: Self) -> Self
-    func |=(inout _: Self, _: Self)
-    func ^(_: Self, _: Self) -> Self
-    func ^=(inout _: Self, _: Self)
-    prefix func ~(_: Self) -> Self
+    static func &+(_: Self, _: Self) -> Self
+    static func &-(_: Self, _: Self) -> Self
+    static func &*(_: Self, _: Self) -> Self
+    static func <<(_: Self, _: Self) -> Self
+    static func >>(_: Self, _: Self) -> Self
+    static func &(_: Self, _: Self) -> Self
+    static func &=( _: inout Self, _: Self)
+    static func |(_: Self, _: Self) -> Self
+    static func |=( _: inout Self, _: Self)
+    static func ^(_: Self, _: Self) -> Self
+    static func ^=( _: inout Self, _: Self)
+    prefix static func ~(_: Self) -> Self
 }
 extension Int: IntegerArithmeticType {}
 extension UInt: IntegerArithmeticType {}
@@ -75,40 +75,39 @@ extension Int64: IntegerArithmeticType {}
 extension UInt64: IntegerArithmeticType {}
 
 
-public protocol MatrixType : MutableCollectionType, Hashable, Equatable, CustomDebugStringConvertible {
-    typealias Element:ArithmeticType
+public protocol MatrixType : MutableCollection, Hashable, CustomDebugStringConvertible where Element: ArithmeticType {
     init()
-    init(_: Self, @noescape _:(_:Element) -> Element)
-    init(_: Element, _: Self, @noescape _:(_:Element, _:Element) -> Element)
-    init(_: Self, _: Element, @noescape _:(_:Element, _:Element) -> Element)
-    init(_: Self, _: Self, @noescape _:(_:Element, _:Element) -> Element)
-    init(_: Self, _: Self, _: Self, @noescape _:(_:Element, _:Element, _:Element) -> Element)
-    func +(_: Self, _: Self) -> Self
-    func +=(inout _: Self, _: Self)
-    func +(_: Element, _: Self) -> Self
-    func +(_: Self, _: Element) -> Self
-    func +=(inout _: Self, _: Element)
-    func -(_: Self, _: Self) -> Self
-    func -=(inout _: Self, _: Self)
-    func -(_: Element, _: Self) -> Self
-    func -(_: Self, _: Element) -> Self
-    func -=(inout _: Self, _: Element)
-    func *(_: Element, _: Self) -> Self
-    func *(_: Self, _: Element) -> Self
-    func *=(inout _: Self, _: Element)
-    func /(_: Element, _: Self) -> Self
-    func /(_: Self, _: Element) -> Self
-    func /=(inout _: Self, _: Element)
-    func %(_: Self, _: Self) -> Self
-    func %=(inout _: Self, _: Self)
-    func %(_: Element, _: Self) -> Self
-    func %(_: Self, _: Element) -> Self
-    func %=(inout _: Self, _: Element)
+    init(_: Self,  _:(_:Element) -> Element)
+    init(_: Element, _: Self,  _:(_:Element, _:Element) -> Element)
+    init(_: Self, _: Element,  _:(_:Element, _:Element) -> Element)
+    init(_: Self, _: Self,  _:(_:Element, _:Element) -> Element)
+    init(_: Self, _: Self, _: Self,  _:(_:Element, _:Element, _:Element) -> Element)
+    static func +(_: Self, _: Self) -> Self
+    static func +=( _: inout Self, _: Self)
+    static func +(_: Element, _: Self) -> Self
+    static func +(_: Self, _: Element) -> Self
+    static func +=( _: inout Self, _: Element)
+    static func -(_: Self, _: Self) -> Self
+    static func -=( _: inout Self, _: Self)
+    static func -(_: Element, _: Self) -> Self
+    static func -(_: Self, _: Element) -> Self
+    static func -=( _: inout Self, _: Element)
+    static func *(_: Element, _: Self) -> Self
+    static func *(_: Self, _: Element) -> Self
+    static func *=( _: inout Self, _: Element)
+    static func /(_: Element, _: Self) -> Self
+    static func /(_: Self, _: Element) -> Self
+    static func /=( _: inout Self, _: Element)
+    static func %(_: Self, _: Self) -> Self
+    static func %=( _: inout Self, _: Self)
+    static func %(_: Element, _: Self) -> Self
+    static func %(_: Self, _: Element) -> Self
+    static func %=( _: inout Self, _: Element)
 }
 
-public protocol VectorType : MatrixType, ArrayLiteralConvertible {
-    func *(_: Self, _: Self) -> Self
-    func *=(inout _: Self, _: Self)
-    func /(_: Self, _: Self) -> Self
-    func /=(inout _: Self, _: Self)
+public protocol VectorType : MatrixType, ExpressibleByArrayLiteral {
+    static func *(_: Self, _: Self) -> Self
+    static func *=( _: inout Self, _: Self)
+    static func /(_: Self, _: Self) -> Self
+    static func /=( _: inout Self, _: Self)
 }

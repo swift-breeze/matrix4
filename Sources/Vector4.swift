@@ -21,6 +21,9 @@
 
 
 public struct Vector4<T:ArithmeticType> : VectorType {
+    public func index(after i: Int) -> Int {
+        return i + 1
+    }
 
     public typealias Element = T
 
@@ -57,7 +60,7 @@ public struct Vector4<T:ArithmeticType> : VectorType {
     }
 
     public var debugDescription: String {
-        return String(self.dynamicType) + "(\(x), \(y), \(z), \(w))"
+        return String(describing: type(of: self)) + "(\(x), \(y), \(z), \(w))"
     }
 
     public var hashValue: Int {
@@ -111,35 +114,35 @@ public struct Vector4<T:ArithmeticType> : VectorType {
         self.w = a
     }
 
-    public init (_ v:Vector4<T>, @noescape _ op:(_:T) -> T) {
+    public init (_ v:Vector4<T>,  _ op:(_:T) -> T) {
         self.x = op(v.x)
         self.y = op(v.y)
         self.z = op(v.z)
         self.w = op(v.w)
     }
 
-    public init (_ s:T, _ v:Vector4<T>, @noescape _ op:(_:T, _:T) -> T) {
+    public init (_ s:T, _ v:Vector4<T>,  _ op:(_:T, _:T) -> T) {
         self.x = op(s, v.x)
         self.y = op(s, v.y)
         self.z = op(s, v.z)
         self.w = op(s, v.w)
     }
 
-    public init (_ v:Vector4<T>, _ s:T, @noescape _ op:(_:T, _:T) -> T) {
+    public init (_ v:Vector4<T>, _ s:T,  _ op:(_:T, _:T) -> T) {
         self.x = op(v.x, s)
         self.y = op(v.y, s)
         self.z = op(v.z, s)
         self.w = op(v.w, s)
     }
 
-    public init (_ v1:Vector4<T>, _ v2:Vector4<T>, @noescape _ op:(_:T, _:T) -> T) {
+    public init (_ v1:Vector4<T>, _ v2:Vector4<T>,  _ op:(_:T, _:T) -> T) {
         self.x = op(v1.x, v2.x)
         self.y = op(v1.y, v2.y)
         self.z = op(v1.z, v2.z)
         self.w = op(v1.w, v2.w)
     }
 
-    public init (_ v1:Vector4<T>, _ v2:Vector4<T>, _ v3:Vector4<T>, @noescape _ op:(_:T, _:T, _:T) -> T) {
+    public init (_ v1:Vector4<T>, _ v2:Vector4<T>, _ v3:Vector4<T>,  _ op:(_:T, _:T, _:T) -> T) {
         self.x = op(v1.x, v2.x, v3.x)
         self.y = op(v1.y, v2.y, v3.y)
         self.z = op(v1.z, v2.z, v3.z)
