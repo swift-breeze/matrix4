@@ -21,7 +21,10 @@
 
 
 public struct Vector2<T:ArithmeticType> : VectorType {
-
+    public func index(after i: Int) -> Int {
+        return i + 1
+    }
+    
     public typealias Element = T
 
     public var x:T, y:T
@@ -51,7 +54,7 @@ public struct Vector2<T:ArithmeticType> : VectorType {
     }
 
     public var debugDescription: String {
-        return String(self.dynamicType) + "(\(x), \(y))"
+        return "\(type(of: self))" + "(\(x), \(y))"
     }
 
     public var hashValue: Int {
@@ -93,27 +96,27 @@ public struct Vector2<T:ArithmeticType> : VectorType {
         self.y = g
     }
 
-    public init (_ v:Vector2<T>, @noescape _ op:(_:T) -> T) {
+    public init (_ v:Vector2<T>,  _ op:(_:T) -> T) {
         self.x = op(v.x)
         self.y = op(v.y)
     }
 
-    public init (_ s:T, _ v:Vector2<T>, @noescape _ op:(_:T, _:T) -> T) {
+    public init (_ s:T, _ v:Vector2<T>,  _ op:(_:T, _:T) -> T) {
         self.x = op(s, v.x)
         self.y = op(s, v.y)
     }
 
-    public init (_ v:Vector2<T>, _ s:T, @noescape _ op:(_:T, _:T) -> T) {
+    public init (_ v:Vector2<T>, _ s:T,  _ op:(_:T, _:T) -> T) {
         self.x = op(v.x, s)
         self.y = op(v.y, s)
     }
 
-    public init (_ v1:Vector2<T>, _ v2:Vector2<T>, @noescape _ op:(_:T, _:T) -> T) {
+    public init (_ v1:Vector2<T>, _ v2:Vector2<T>,  _ op:(_:T, _:T) -> T) {
         self.x = op(v1.x, v2.x)
         self.y = op(v1.y, v2.y)
     }
 
-    public init (_ v1:Vector2<T>, _ v2:Vector2<T>, _ v3:Vector2<T>, @noescape _ op:(_:T, _:T, _:T) -> T) {
+    public init (_ v1:Vector2<T>, _ v2:Vector2<T>, _ v3:Vector2<T>,  _ op:(_:T, _:T, _:T) -> T) {
         self.x = op(v1.x, v2.x, v3.x)
         self.y = op(v1.y, v2.y, v3.y)
     }
@@ -188,9 +191,10 @@ public struct Vector2<T:ArithmeticType> : VectorType {
     public var rg:Vector2<T> { get { return Vector2<T>(x,y) } set { x = newValue.x; y = newValue.y } }
     public var gr:Vector2<T> { get { return Vector2<T>(y,x) } set { y = newValue.x; x = newValue.y } }
 
+    public static func ==<T:ArithmeticType>(v1: Vector2<T>, v2: Vector2<T>) -> Bool {
+        return v1.x == v2.x && v1.y == v2.y
+    }
 }
 
 
-public func ==<T:ArithmeticType>(v1: Vector2<T>, v2: Vector2<T>) -> Bool {
-    return v1.x == v2.x && v1.y == v2.y
-}
+

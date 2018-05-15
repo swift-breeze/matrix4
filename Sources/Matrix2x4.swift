@@ -26,13 +26,46 @@ import simd
 
 
 public struct Matrix2x4<T:ArithmeticType> : MatrixType {
-
+    public func index(after i: Matrix2x4<T>.Index) -> Matrix2x4<T>.Index {
+        if i.y == 3 && i.x == 1 {
+            return endIndex
+        }
+        
+        if i.x == 1 && i.y < 3 {
+            return Index(x: 0, y: i.y + 1)
+        }
+        
+        return Index(x: i.x + 1, y: i.y)
+    }
+    
+    public var startIndex: Matrix2x4<T>.Index { return Index(x: 0, y: 0) }
+    
+    public var endIndex: Matrix2x4<T>.Index { return Index(x: 2, y: 4) }
+    
+    public struct Index: Comparable {
+        let x: Int
+        let y: Int
+        
+        public static func <(lhs: Index, rhs: Index) -> Bool {
+            if lhs.y == rhs.y {
+                return lhs.x < rhs.x
+            }
+            
+            return lhs.y < rhs.y
+        }
+    }
+    
+    public subscript(position: Index) -> T {
+        get {
+            return self[position.y][position.x]
+        }
+        set {
+            self[position.y][position.x] = newValue
+        }
+    }
     public typealias Element = T
 
-    private var x:Vector4<T>, y:Vector4<T>
-
-    public var startIndex: Int { return 0 }
-    public var endIndex: Int { return 2 }
+    fileprivate var x:Vector4<T>, y:Vector4<T>
 
     public subscript(column: Int) -> Vector4<T> {
         get {
@@ -56,9 +89,9 @@ public struct Matrix2x4<T:ArithmeticType> : MatrixType {
     }
 
     public var debugDescription: String {
-        return String(self.dynamicType) + "(" + [x,y].map{ (v:Vector4<T>) -> String in
-            "[" + [v.x,v.y,v.z,v.w].map{ (n:T) -> String in String(n) }.joinWithSeparator(", ") + "]"
-            }.joinWithSeparator(", ") + ")"
+        return String(describing: type(of: self)) + "(" + [x,y].map{ (v:Vector4<T>) -> String in
+            "[" + [v.x,v.y,v.z,v.w].map{ (n:T) -> String in String(describing: n) }.joined(separator: ", ") + "]"
+            }.joined(separator: ", ") + ")"
     }
 
     public var hashValue: Int {
@@ -88,27 +121,27 @@ public struct Matrix2x4<T:ArithmeticType> : MatrixType {
             self.y = Vector4<T>(x2, y2, z2, w2)
     }
 
-    public init (_ m:Matrix2x4<T>, @noescape _ op:(_:T) -> T) {
+    public init (_ m:Matrix2x4<T>,  _ op:(_:T) -> T) {
         self.x = Vector4<T>(m.x, op)
         self.y = Vector4<T>(m.y, op)
     }
 
-    public init (_ s:T, _ m:Matrix2x4<T>, @noescape _ op:(_:T, _:T) -> T) {
+    public init (_ s:T, _ m:Matrix2x4<T>,  _ op:(_:T, _:T) -> T) {
         self.x = Vector4<T>(s, m.x, op)
         self.y = Vector4<T>(s, m.y, op)
     }
 
-    public init (_ m:Matrix2x4<T>, _ s:T, @noescape _ op:(_:T, _:T) -> T) {
+    public init (_ m:Matrix2x4<T>, _ s:T,  _ op:(_:T, _:T) -> T) {
         self.x = Vector4<T>(m.x, s, op)
         self.y = Vector4<T>(m.y, s, op)
     }
 
-    public init (_ m1:Matrix2x4<T>, _ m2:Matrix2x4<T>, @noescape _ op:(_:T, _:T) -> T) {
+    public init (_ m1:Matrix2x4<T>, _ m2:Matrix2x4<T>,  _ op:(_:T, _:T) -> T) {
         self.x = Vector4<T>(m1.x, m2.x, op)
         self.y = Vector4<T>(m1.y, m2.y, op)
     }
 
-    public init (_ m1:Matrix2x4<T>, _ m2:Matrix2x4<T>, _ m3:Matrix2x4<T>, @noescape _ op:(_:T, _:T, _:T) -> T) {
+    public init (_ m1:Matrix2x4<T>, _ m2:Matrix2x4<T>, _ m3:Matrix2x4<T>,  _ op:(_:T, _:T, _:T) -> T) {
         self.x = Vector4<T>(m1.x, m2.x, m3.x, op)
         self.y = Vector4<T>(m1.y, m2.y, m3.y, op)
     }
@@ -195,14 +228,14 @@ public func ==<T:ArithmeticType>(m1: Matrix2x4<T>, m2: Matrix2x4<T>) -> Bool {
 }
 
 
-@warn_unused_result
+
 public func *<T:ArithmeticType>(v: Vector4<T>, m: Matrix2x4<T>) -> Vector2<T> {
     #if !os(Linux)
         if T.self == Float.self {
-            return unsafeBitCast(unsafeBitCast(v, float4.self) * unsafeBitCast(m, float2x4.self), Vector2<T>.self)
+            return unsafeBitCast(unsafeBitCast(v, to: float4.self) * unsafeBitCast(m, to: float2x4.self), to: Vector2<T>.self)
         }
         if T.self == Double.self {
-            return unsafeBitCast(unsafeBitCast(v, double4.self) * unsafeBitCast(m, double2x4.self), Vector2<T>.self)
+            return unsafeBitCast(unsafeBitCast(v, to: double4.self) * unsafeBitCast(m, to: double2x4.self), to: Vector2<T>.self)
         }
     #endif
     var x:T = v.x * m.x.x
@@ -217,28 +250,28 @@ public func *<T:ArithmeticType>(v: Vector4<T>, m: Matrix2x4<T>) -> Vector2<T> {
 }
 
 
-@warn_unused_result
+
 public func *<T:ArithmeticType>(m: Matrix2x4<T>, v: Vector2<T>) -> Vector4<T> {
     #if !os(Linux)
         if T.self == Float.self {
-            return unsafeBitCast(unsafeBitCast(m, float2x4.self) * unsafeBitCast(v, float2.self), Vector4<T>.self)
+            return unsafeBitCast(unsafeBitCast(m, to: float2x4.self) * unsafeBitCast(v, to: float2.self), to: Vector4<T>.self)
         }
         if T.self == Double.self {
-            return unsafeBitCast(unsafeBitCast(m, double2x4.self) * unsafeBitCast(v, double2.self), Vector4<T>.self)
+            return unsafeBitCast(unsafeBitCast(m, to: double2x4.self) * unsafeBitCast(v, to: double2.self), to: Vector4<T>.self)
         }
     #endif
     return m.x * v.x + m.y * v.y
 }
 
 
-@warn_unused_result
+
 public func *<T:ArithmeticType>(m1: Matrix2x4<T>, m2: Matrix2x2<T>) -> Matrix2x4<T> {
     #if !os(Linux)
         if T.self == Float.self {
-            return unsafeBitCast(unsafeBitCast(m1, float2x4.self) * unsafeBitCast(m2, float2x2.self), Matrix2x4<T>.self)
+            return unsafeBitCast(unsafeBitCast(m1, to: float2x4.self) * unsafeBitCast(m2, to: float2x2.self), to: Matrix2x4<T>.self)
         }
         if T.self == Double.self {
-            return unsafeBitCast(unsafeBitCast(m1, double2x4.self) * unsafeBitCast(m2, double2x2.self), Matrix2x4<T>.self)
+            return unsafeBitCast(unsafeBitCast(m1, to: double2x4.self) * unsafeBitCast(m2, to: double2x2.self), to: Matrix2x4<T>.self)
         }
     #endif
     var x:Vector4<T> = m1.x * m2[0].x
@@ -249,14 +282,14 @@ public func *<T:ArithmeticType>(m1: Matrix2x4<T>, m2: Matrix2x2<T>) -> Matrix2x4
 }
 
 
-@warn_unused_result
+
 public func *<T:ArithmeticType>(m1: Matrix2x4<T>, m2: Matrix3x2<T>) -> Matrix3x4<T> {
     #if !os(Linux)
         if T.self == Float.self {
-            return unsafeBitCast(unsafeBitCast(m1, float2x4.self) * unsafeBitCast(m2, float3x2.self), Matrix3x4<T>.self)
+            return unsafeBitCast(unsafeBitCast(m1, to: float2x4.self) * unsafeBitCast(m2, to: float3x2.self), to: Matrix3x4<T>.self)
         }
         if T.self == Double.self {
-            return unsafeBitCast(unsafeBitCast(m1, double2x4.self) * unsafeBitCast(m2, double3x2.self), Matrix3x4<T>.self)
+            return unsafeBitCast(unsafeBitCast(m1, to: double2x4.self) * unsafeBitCast(m2, to: double3x2.self), to: Matrix3x4<T>.self)
         }
     #endif
     var x:Vector4<T> = m1.x * m2[0].x
@@ -269,14 +302,14 @@ public func *<T:ArithmeticType>(m1: Matrix2x4<T>, m2: Matrix3x2<T>) -> Matrix3x4
 }
 
 
-@warn_unused_result
+
 public func *<T:ArithmeticType>(m1: Matrix2x4<T>, m2: Matrix4x2<T>) -> Matrix4x4<T> {
     #if !os(Linux)
         if T.self == Float.self {
-            return unsafeBitCast(unsafeBitCast(m1, float2x4.self) * unsafeBitCast(m2, float4x2.self), Matrix4x4<T>.self)
+            return unsafeBitCast(unsafeBitCast(m1, to: float2x4.self) * unsafeBitCast(m2, to: float4x2.self), to: Matrix4x4<T>.self)
         }
         if T.self == Double.self {
-            return unsafeBitCast(unsafeBitCast(m1, double2x4.self) * unsafeBitCast(m2, double4x2.self), Matrix4x4<T>.self)
+            return unsafeBitCast(unsafeBitCast(m1, to: double2x4.self) * unsafeBitCast(m2, to: double4x2.self), to: Matrix4x4<T>.self)
         }
     #endif
     var x:Vector4<T> = m1.x * m2[0].x

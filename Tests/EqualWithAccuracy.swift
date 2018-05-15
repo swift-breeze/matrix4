@@ -24,7 +24,7 @@ import XCTest
 import Matrix4
 
 
-func XCTAssertEqualWithAccuracy<T: FloatingPointType>(@autoclosure expression1: () -> Vector2<T>, @autoclosure _ expression2: () -> Vector2<T>, accuracy: T, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__)
+func XCTAssertEqualWithAccuracy<T: FloatingPoint>(@autoclosure expression1: () -> Vector2<T>, @autoclosure _ expression2: () -> Vector2<T>, accuracy: T, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__)
 {
     let e1 = expression1()
     let e2 = expression2()
@@ -34,7 +34,7 @@ func XCTAssertEqualWithAccuracy<T: FloatingPointType>(@autoclosure expression1: 
 }
 
 
-func XCTAssertNotEqualWithAccuracy<T: FloatingPointType>(@autoclosure expression1: () -> Vector2<T>, @autoclosure _ expression2: () -> Vector2<T>, accuracy: T, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__)
+func XCTAssertNotEqualWithAccuracy<T: FloatingPoint>(@autoclosure expression1: () -> Vector2<T>, @autoclosure _ expression2: () -> Vector2<T>, accuracy: T, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__)
 {
     let e1 = expression1()
     let e2 = expression2()
@@ -44,7 +44,7 @@ func XCTAssertNotEqualWithAccuracy<T: FloatingPointType>(@autoclosure expression
 }
 
 
-func XCTAssertEqualWithAccuracy<T: FloatingPointType>(@autoclosure expression1: () -> Vector3<T>, @autoclosure _ expression2: () -> Vector3<T>, accuracy: T, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__)
+func XCTAssertEqualWithAccuracy<T: FloatingPoint>(@autoclosure expression1: () -> Vector3<T>, @autoclosure _ expression2: () -> Vector3<T>, accuracy: T, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__)
 {
     let e1 = expression1()
     let e2 = expression2()
@@ -53,7 +53,7 @@ func XCTAssertEqualWithAccuracy<T: FloatingPointType>(@autoclosure expression1: 
     XCTAssert(equalVector3(e1, e2, dist), msg, file: file, line: line)
 }
 
-func XCTAssertNotEqualWithAccuracy<T: FloatingPointType>(@autoclosure expression1: () -> Vector3<T>, @autoclosure _ expression2: () -> Vector3<T>, accuracy: T, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__)
+func XCTAssertNotEqualWithAccuracy<T: FloatingPoint>(@autoclosure expression1: () -> Vector3<T>, @autoclosure _ expression2: () -> Vector3<T>, accuracy: T, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__)
 {
     let e1 = expression1()
     let e2 = expression2()
@@ -63,7 +63,7 @@ func XCTAssertNotEqualWithAccuracy<T: FloatingPointType>(@autoclosure expression
 }
 
 
-func XCTAssertEqualWithAccuracy<T: FloatingPointType>(@autoclosure expression1: () -> Vector4<T>, @autoclosure _ expression2: () -> Vector4<T>, accuracy: T, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__)
+func XCTAssertEqualWithAccuracy<T: FloatingPoint>(@autoclosure expression1: () -> Vector4<T>, @autoclosure _ expression2: () -> Vector4<T>, accuracy: T, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__)
 {
     let e1 = expression1()
     let e2 = expression2()
@@ -73,7 +73,7 @@ func XCTAssertEqualWithAccuracy<T: FloatingPointType>(@autoclosure expression1: 
 }
 
 
-func XCTAssertNotEqualWithAccuracy<T: FloatingPointType>(@autoclosure expression1: () -> Vector4<T>, @autoclosure _ expression2: () -> Vector4<T>, accuracy: T, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__)
+func XCTAssertNotEqualWithAccuracy<T: FloatingPoint>(@autoclosure expression1: () -> Vector4<T>, @autoclosure _ expression2: () -> Vector4<T>, accuracy: T, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__)
 {
     let e1 = expression1()
     let e2 = expression2()
@@ -83,7 +83,7 @@ func XCTAssertNotEqualWithAccuracy<T: FloatingPointType>(@autoclosure expression
 }
 
 
-func XCTAssertEqualWithAccuracy<T: FloatingPointType>(@autoclosure expression1: () -> Matrix2x2<T>, @autoclosure _ expression2: () -> Matrix2x2<T>, accuracy: T, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__)
+func XCTAssertEqualWithAccuracy<T: FloatingPoint>(@autoclosure expression1: () -> Matrix2x2<T>, @autoclosure _ expression2: () -> Matrix2x2<T>, accuracy: T, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__)
 {
     let e1 = expression1()
     let e2 = expression2()
@@ -93,7 +93,7 @@ func XCTAssertEqualWithAccuracy<T: FloatingPointType>(@autoclosure expression1: 
 }
 
 
-func XCTAssertNotEqualWithAccuracy<T: FloatingPointType>(@autoclosure expression1: () -> Matrix2x2<T>, @autoclosure _ expression2: () -> Matrix2x2<T>, accuracy: T, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__)
+func XCTAssertNotEqualWithAccuracy<T: FloatingPoint>(@autoclosure expression1: () -> Matrix2x2<T>, @autoclosure _ expression2: () -> Matrix2x2<T>, accuracy: T, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__)
 {
     let e1 = expression1()
     let e2 = expression2()
@@ -103,7 +103,7 @@ func XCTAssertNotEqualWithAccuracy<T: FloatingPointType>(@autoclosure expression
 }
 
 
-func XCTAssertEqualWithAccuracy<T: FloatingPointType>(@autoclosure expression1: () -> Matrix2x3<T>, @autoclosure _ expression2: () -> Matrix2x3<T>, accuracy: T, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__)
+func XCTAssertEqualWithAccuracy<T: FloatingPoint>(@autoclosure expression1: () -> Matrix2x3<T>, @autoclosure _ expression2: () -> Matrix2x3<T>, accuracy: T, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__)
 {
     let e1 = expression1()
     let e2 = expression2()
@@ -113,7 +113,7 @@ func XCTAssertEqualWithAccuracy<T: FloatingPointType>(@autoclosure expression1: 
 }
 
 
-func XCTAssertNotEqualWithAccuracy<T: FloatingPointType>(@autoclosure expression1: () -> Matrix2x3<T>, @autoclosure _ expression2: () -> Matrix2x3<T>, accuracy: T, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__)
+func XCTAssertNotEqualWithAccuracy<T: FloatingPoint>(@autoclosure expression1: () -> Matrix2x3<T>, @autoclosure _ expression2: () -> Matrix2x3<T>, accuracy: T, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__)
 {
     let e1 = expression1()
     let e2 = expression2()
@@ -123,7 +123,7 @@ func XCTAssertNotEqualWithAccuracy<T: FloatingPointType>(@autoclosure expression
 }
 
 
-func XCTAssertEqualWithAccuracy<T: FloatingPointType>(@autoclosure expression1: () -> Matrix2x4<T>, @autoclosure _ expression2: () -> Matrix2x4<T>, accuracy: T, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__)
+func XCTAssertEqualWithAccuracy<T: FloatingPoint>(@autoclosure expression1: () -> Matrix2x4<T>, @autoclosure _ expression2: () -> Matrix2x4<T>, accuracy: T, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__)
 {
     let e1 = expression1()
     let e2 = expression2()
@@ -133,7 +133,7 @@ func XCTAssertEqualWithAccuracy<T: FloatingPointType>(@autoclosure expression1: 
 }
 
 
-func XCTAssertNotEqualWithAccuracy<T: FloatingPointType>(@autoclosure expression1: () -> Matrix2x4<T>, @autoclosure _ expression2: () -> Matrix2x4<T>, accuracy: T, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__)
+func XCTAssertNotEqualWithAccuracy<T: FloatingPoint>(@autoclosure expression1: () -> Matrix2x4<T>, @autoclosure _ expression2: () -> Matrix2x4<T>, accuracy: T, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__)
 {
     let e1 = expression1()
     let e2 = expression2()
@@ -143,7 +143,7 @@ func XCTAssertNotEqualWithAccuracy<T: FloatingPointType>(@autoclosure expression
 }
 
 
-func XCTAssertEqualWithAccuracy<T: FloatingPointType>(@autoclosure expression1: () -> Matrix3x2<T>, @autoclosure _ expression2: () -> Matrix3x2<T>, accuracy: T, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__)
+func XCTAssertEqualWithAccuracy<T: FloatingPoint>(@autoclosure expression1: () -> Matrix3x2<T>, @autoclosure _ expression2: () -> Matrix3x2<T>, accuracy: T, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__)
 {
     let e1 = expression1()
     let e2 = expression2()
@@ -153,7 +153,7 @@ func XCTAssertEqualWithAccuracy<T: FloatingPointType>(@autoclosure expression1: 
 }
 
 
-func XCTAssertNotEqualWithAccuracy<T: FloatingPointType>(@autoclosure expression1: () -> Matrix3x2<T>, @autoclosure _ expression2: () -> Matrix3x2<T>, accuracy: T, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__)
+func XCTAssertNotEqualWithAccuracy<T: FloatingPoint>(@autoclosure expression1: () -> Matrix3x2<T>, @autoclosure _ expression2: () -> Matrix3x2<T>, accuracy: T, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__)
 {
     let e1 = expression1()
     let e2 = expression2()
@@ -163,7 +163,7 @@ func XCTAssertNotEqualWithAccuracy<T: FloatingPointType>(@autoclosure expression
 }
 
 
-func XCTAssertEqualWithAccuracy<T: FloatingPointType>(@autoclosure expression1: () -> Matrix3x3<T>, @autoclosure _ expression2: () -> Matrix3x3<T>, accuracy: T, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__)
+func XCTAssertEqualWithAccuracy<T: FloatingPoint>(@autoclosure expression1: () -> Matrix3x3<T>, @autoclosure _ expression2: () -> Matrix3x3<T>, accuracy: T, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__)
 {
     let e1 = expression1()
     let e2 = expression2()
@@ -173,7 +173,7 @@ func XCTAssertEqualWithAccuracy<T: FloatingPointType>(@autoclosure expression1: 
 }
 
 
-func XCTAssertNotEqualWithAccuracy<T: FloatingPointType>(@autoclosure expression1: () -> Matrix3x3<T>, @autoclosure _ expression2: () -> Matrix3x3<T>, accuracy: T, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__)
+func XCTAssertNotEqualWithAccuracy<T: FloatingPoint>(@autoclosure expression1: () -> Matrix3x3<T>, @autoclosure _ expression2: () -> Matrix3x3<T>, accuracy: T, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__)
 {
     let e1 = expression1()
     let e2 = expression2()
@@ -183,7 +183,7 @@ func XCTAssertNotEqualWithAccuracy<T: FloatingPointType>(@autoclosure expression
 }
 
 
-func XCTAssertEqualWithAccuracy<T: FloatingPointType>(@autoclosure expression1: () -> Matrix3x4<T>, @autoclosure _ expression2: () -> Matrix3x4<T>, accuracy: T, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__)
+func XCTAssertEqualWithAccuracy<T: FloatingPoint>(@autoclosure expression1: () -> Matrix3x4<T>, @autoclosure _ expression2: () -> Matrix3x4<T>, accuracy: T, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__)
 {
     let e1 = expression1()
     let e2 = expression2()
@@ -193,7 +193,7 @@ func XCTAssertEqualWithAccuracy<T: FloatingPointType>(@autoclosure expression1: 
 }
 
 
-func XCTAssertNotEqualWithAccuracy<T: FloatingPointType>(@autoclosure expression1: () -> Matrix3x4<T>, @autoclosure _ expression2: () -> Matrix3x4<T>, accuracy: T, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__)
+func XCTAssertNotEqualWithAccuracy<T: FloatingPoint>(@autoclosure expression1: () -> Matrix3x4<T>, @autoclosure _ expression2: () -> Matrix3x4<T>, accuracy: T, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__)
 {
     let e1 = expression1()
     let e2 = expression2()
@@ -203,7 +203,7 @@ func XCTAssertNotEqualWithAccuracy<T: FloatingPointType>(@autoclosure expression
 }
 
 
-func XCTAssertEqualWithAccuracy<T: FloatingPointType>(@autoclosure expression1: () -> Matrix4x2<T>, @autoclosure _ expression2: () -> Matrix4x2<T>, accuracy: T, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__)
+func XCTAssertEqualWithAccuracy<T: FloatingPoint>(@autoclosure expression1: () -> Matrix4x2<T>, @autoclosure _ expression2: () -> Matrix4x2<T>, accuracy: T, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__)
 {
     let e1 = expression1()
     let e2 = expression2()
@@ -213,7 +213,7 @@ func XCTAssertEqualWithAccuracy<T: FloatingPointType>(@autoclosure expression1: 
 }
 
 
-func XCTAssertNotEqualWithAccuracy<T: FloatingPointType>(@autoclosure expression1: () -> Matrix4x2<T>, @autoclosure _ expression2: () -> Matrix4x2<T>, accuracy: T, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__)
+func XCTAssertNotEqualWithAccuracy<T: FloatingPoint>(@autoclosure expression1: () -> Matrix4x2<T>, @autoclosure _ expression2: () -> Matrix4x2<T>, accuracy: T, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__)
 {
     let e1 = expression1()
     let e2 = expression2()
@@ -223,7 +223,7 @@ func XCTAssertNotEqualWithAccuracy<T: FloatingPointType>(@autoclosure expression
 }
 
 
-func XCTAssertEqualWithAccuracy<T: FloatingPointType>(@autoclosure expression1: () -> Matrix4x3<T>, @autoclosure _ expression2: () -> Matrix4x3<T>, accuracy: T, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__)
+func XCTAssertEqualWithAccuracy<T: FloatingPoint>(@autoclosure expression1: () -> Matrix4x3<T>, @autoclosure _ expression2: () -> Matrix4x3<T>, accuracy: T, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__)
 {
     let e1 = expression1()
     let e2 = expression2()
@@ -233,7 +233,7 @@ func XCTAssertEqualWithAccuracy<T: FloatingPointType>(@autoclosure expression1: 
 }
 
 
-func XCTAssertNotEqualWithAccuracy<T: FloatingPointType>(@autoclosure expression1: () -> Matrix4x3<T>, @autoclosure _ expression2: () -> Matrix4x3<T>, accuracy: T, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__)
+func XCTAssertNotEqualWithAccuracy<T: FloatingPoint>(@autoclosure expression1: () -> Matrix4x3<T>, @autoclosure _ expression2: () -> Matrix4x3<T>, accuracy: T, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__)
 {
     let e1 = expression1()
     let e2 = expression2()
@@ -243,7 +243,7 @@ func XCTAssertNotEqualWithAccuracy<T: FloatingPointType>(@autoclosure expression
 }
 
 
-func XCTAssertEqualWithAccuracy<T: FloatingPointType>(@autoclosure expression1: () -> Matrix4x4<T>, @autoclosure _ expression2: () -> Matrix4x4<T>, accuracy: T, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__)
+func XCTAssertEqualWithAccuracy<T: FloatingPoint>(@autoclosure expression1: () -> Matrix4x4<T>, @autoclosure _ expression2: () -> Matrix4x4<T>, accuracy: T, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__)
 {
     let e1 = expression1()
     let e2 = expression2()
@@ -253,7 +253,7 @@ func XCTAssertEqualWithAccuracy<T: FloatingPointType>(@autoclosure expression1: 
 }
 
 
-func XCTAssertNotEqualWithAccuracy<T: FloatingPointType>(@autoclosure expression1: () -> Matrix4x4<T>, @autoclosure _ expression2: () -> Matrix4x4<T>, accuracy: T, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__)
+func XCTAssertNotEqualWithAccuracy<T: FloatingPoint>(@autoclosure expression1: () -> Matrix4x4<T>, @autoclosure _ expression2: () -> Matrix4x4<T>, accuracy: T, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__)
 {
     let e1 = expression1()
     let e2 = expression2()
@@ -263,7 +263,7 @@ func XCTAssertNotEqualWithAccuracy<T: FloatingPointType>(@autoclosure expression
 }
 
 
-private func equalVector2<T: FloatingPointType>(e1: Vector2<T>, _ e2: Vector2<T>, _ dist: T.Stride) -> Bool
+private func equalVector2<T: FloatingPoint>(e1: Vector2<T>, _ e2: Vector2<T>, _ dist: T.Stride) -> Bool
 {
     return
         abs(e1.x.distanceTo(e2.x)) <= dist &&
@@ -271,7 +271,7 @@ private func equalVector2<T: FloatingPointType>(e1: Vector2<T>, _ e2: Vector2<T>
 }
 
 
-private func equalVector3<T: FloatingPointType>(e1: Vector3<T>, _ e2: Vector3<T>, _ dist: T.Stride) -> Bool
+private func equalVector3<T: FloatingPoint>(e1: Vector3<T>, _ e2: Vector3<T>, _ dist: T.Stride) -> Bool
 {
     return
         abs(e1.x.distanceTo(e2.x)) <= dist &&
@@ -280,7 +280,7 @@ private func equalVector3<T: FloatingPointType>(e1: Vector3<T>, _ e2: Vector3<T>
 }
 
 
-private func equalVector4<T: FloatingPointType>(e1: Vector4<T>, _ e2: Vector4<T>, _ dist: T.Stride) -> Bool
+private func equalVector4<T: FloatingPoint>(e1: Vector4<T>, _ e2: Vector4<T>, _ dist: T.Stride) -> Bool
 {
     return
         abs(e1.x.distanceTo(e2.x)) <= dist &&
@@ -290,7 +290,7 @@ private func equalVector4<T: FloatingPointType>(e1: Vector4<T>, _ e2: Vector4<T>
 }
 
 
-private func equalMatrix2x2<T: FloatingPointType>(e1: Matrix2x2<T>, _ e2: Matrix2x2<T>, _ dist: T.Stride) -> Bool
+private func equalMatrix2x2<T: FloatingPoint>(e1: Matrix2x2<T>, _ e2: Matrix2x2<T>, _ dist: T.Stride) -> Bool
 {
     return
         abs(e1[0].x.distanceTo(e2[0].x)) <= dist &&
@@ -301,7 +301,7 @@ private func equalMatrix2x2<T: FloatingPointType>(e1: Matrix2x2<T>, _ e2: Matrix
 }
 
 
-private func equalMatrix2x3<T: FloatingPointType>(e1: Matrix2x3<T>, _ e2: Matrix2x3<T>, _ dist: T.Stride) -> Bool
+private func equalMatrix2x3<T: FloatingPoint>(e1: Matrix2x3<T>, _ e2: Matrix2x3<T>, _ dist: T.Stride) -> Bool
 {
     return
         abs(e1[0].x.distanceTo(e2[0].x)) <= dist &&
@@ -314,7 +314,7 @@ private func equalMatrix2x3<T: FloatingPointType>(e1: Matrix2x3<T>, _ e2: Matrix
 }
 
 
-private func equalMatrix2x4<T: FloatingPointType>(e1: Matrix2x4<T>, _ e2: Matrix2x4<T>, _ dist: T.Stride) -> Bool
+private func equalMatrix2x4<T: FloatingPoint>(e1: Matrix2x4<T>, _ e2: Matrix2x4<T>, _ dist: T.Stride) -> Bool
 {
     return
         abs(e1[0].x.distanceTo(e2[0].x)) <= dist &&
@@ -329,7 +329,7 @@ private func equalMatrix2x4<T: FloatingPointType>(e1: Matrix2x4<T>, _ e2: Matrix
 }
 
 
-private func equalMatrix3x2<T: FloatingPointType>(e1: Matrix3x2<T>, _ e2: Matrix3x2<T>, _ dist: T.Stride) -> Bool
+private func equalMatrix3x2<T: FloatingPoint>(e1: Matrix3x2<T>, _ e2: Matrix3x2<T>, _ dist: T.Stride) -> Bool
 {
     return
         abs(e1[0].x.distanceTo(e2[0].x)) <= dist &&
@@ -343,7 +343,7 @@ private func equalMatrix3x2<T: FloatingPointType>(e1: Matrix3x2<T>, _ e2: Matrix
 }
 
 
-private func equalMatrix3x3<T: FloatingPointType>(e1: Matrix3x3<T>, _ e2: Matrix3x3<T>, _ dist: T.Stride) -> Bool
+private func equalMatrix3x3<T: FloatingPoint>(e1: Matrix3x3<T>, _ e2: Matrix3x3<T>, _ dist: T.Stride) -> Bool
 {
     return
         abs(e1[0].x.distanceTo(e2[0].x)) <= dist &&
@@ -360,7 +360,7 @@ private func equalMatrix3x3<T: FloatingPointType>(e1: Matrix3x3<T>, _ e2: Matrix
 }
 
 
-private func equalMatrix3x4<T: FloatingPointType>(e1: Matrix3x4<T>, _ e2: Matrix3x4<T>, _ dist: T.Stride) -> Bool
+private func equalMatrix3x4<T: FloatingPoint>(e1: Matrix3x4<T>, _ e2: Matrix3x4<T>, _ dist: T.Stride) -> Bool
 {
     return
         abs(e1[0].x.distanceTo(e2[0].x)) <= dist &&
@@ -380,7 +380,7 @@ private func equalMatrix3x4<T: FloatingPointType>(e1: Matrix3x4<T>, _ e2: Matrix
 }
 
 
-private func equalMatrix4x2<T: FloatingPointType>(e1: Matrix4x2<T>, _ e2: Matrix4x2<T>, _ dist: T.Stride) -> Bool
+private func equalMatrix4x2<T: FloatingPoint>(e1: Matrix4x2<T>, _ e2: Matrix4x2<T>, _ dist: T.Stride) -> Bool
 {
     return
         abs(e1[0].x.distanceTo(e2[0].x)) <= dist &&
@@ -397,7 +397,7 @@ private func equalMatrix4x2<T: FloatingPointType>(e1: Matrix4x2<T>, _ e2: Matrix
 }
 
 
-private func equalMatrix4x3<T: FloatingPointType>(e1: Matrix4x3<T>, _ e2: Matrix4x3<T>, _ dist: T.Stride) -> Bool
+private func equalMatrix4x3<T: FloatingPoint>(e1: Matrix4x3<T>, _ e2: Matrix4x3<T>, _ dist: T.Stride) -> Bool
 {
     return
         abs(e1[0].x.distanceTo(e2[0].x)) <= dist &&
@@ -418,7 +418,7 @@ private func equalMatrix4x3<T: FloatingPointType>(e1: Matrix4x3<T>, _ e2: Matrix
 }
 
 
-private func equalMatrix4x4<T: FloatingPointType>(e1: Matrix4x4<T>, _ e2: Matrix4x4<T>, _ dist: T.Stride) -> Bool
+private func equalMatrix4x4<T: FloatingPoint>(e1: Matrix4x4<T>, _ e2: Matrix4x4<T>, _ dist: T.Stride) -> Bool
 {
     return
         abs(e1[0].x.distanceTo(e2[0].x)) <= dist &&

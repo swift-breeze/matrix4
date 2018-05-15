@@ -34,13 +34,13 @@ internal final class InternalMatrix4 {
 
     // MurmurHash3 by Austin Appleby
     // https://en.wikipedia.org/wiki/MurmurHash
-    static func hash(nums: Int...) -> Int
+    static func hash(_ nums: Int...) -> Int
     {
-        if sizeof(Int) == 8 { // 64 bit
-            func rotl(x:UInt, _ r:UInt) -> UInt {
+        if MemoryLayout<Int>.size == 8 { // 64 bit
+            func rotl(_ x:UInt, _ r:UInt) -> UInt {
                 return (x << r) | (x >> (64 - r))
             }
-            func fmix(kk: UInt) -> UInt {
+            func fmix(_ kk: UInt) -> UInt {
                 var k = kk
                 k ^= k >> 33
                 k = k &* 0xff51afd7ed558ccd
@@ -53,7 +53,7 @@ internal final class InternalMatrix4 {
             let c2:UInt = 0x4cf5ad432745937f
             var h1:UInt = c1 ^ UInt(nums.count)
             var h2:UInt = c2 ^ UInt(nums.count)
-            var data = nums.generate()
+            var data = nums.makeIterator()
             while true {
                 if let k = data.next() {
                     var k1 = UInt(bitPattern: k) &* c1
@@ -106,7 +106,7 @@ internal final class InternalMatrix4 {
         }
     }
 
-    static func M4sqrt<T:FloatingPointType>(x:T) -> T {
+    static func M4sqrt<T:FloatingPoint>(_ x:T) -> T {
         if let z = x as? Double {
             return sqrt(z) as! T
         }
@@ -116,7 +116,7 @@ internal final class InternalMatrix4 {
         preconditionFailure()
     }
 
-    static func M4floor<T:FloatingPointType>(x:T) -> T {
+    static func M4floor<T:FloatingPoint>(_ x:T) -> T {
         if let z = x as? Double {
             return floor(z) as! T
         }
@@ -126,7 +126,7 @@ internal final class InternalMatrix4 {
         preconditionFailure()
     }
 
-    static func M4trunc<T:FloatingPointType>(x:T) -> T {
+    static func M4trunc<T:FloatingPoint>(_ x:T) -> T {
         if let z = x as? Double {
             return trunc(z) as! T
         }
@@ -136,7 +136,7 @@ internal final class InternalMatrix4 {
         preconditionFailure()
     }
 
-    static func M4ceil<T:FloatingPointType>(x:T) -> T {
+    static func M4ceil<T:FloatingPoint>(_ x:T) -> T {
         if let z = x as? Double {
             return ceil(z) as! T
         }
